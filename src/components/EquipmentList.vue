@@ -22,6 +22,56 @@
           {{ item.atk }}
         </span>
       </template>
+      <template v-slot:item.atkp="{ item }">
+        <span :style="{color: getColor(item.atkp, 'atkp')}">
+          {{ item.atkp }}
+        </span>
+      </template>
+      <template v-slot:item.cri="{ item }">
+        <span :style="{color: getColor(item.cri, 'cri')}">
+          {{ item.cri }}
+        </span>
+      </template>
+      <template v-slot:item.crid="{ item }">
+        <span :style="{color: getColor(item.crid, 'crid')}">
+          {{ item.crid }}
+        </span>
+      </template>
+      <template v-slot:item.spd="{ item }">
+        <span :style="{color: getColor(item.spd, 'spd')}">
+          {{ item.spd }}
+        </span>
+      </template>
+      <template v-slot:item.hp="{ item }">
+        <span :style="{color: getColor(item.hp, 'hp')}">
+          {{ item.hp }}
+        </span>
+      </template>
+      <template v-slot:item.hpp="{ item }">
+        <span :style="{color: getColor(item.hpp, 'hpp')}">
+          {{ item.hpp }}
+        </span>
+      </template>
+      <template v-slot:item.def="{ item }">
+        <span :style="{color: getColor(item.def, 'def')}">
+          {{ item.def }}
+        </span>
+      </template>
+      <template v-slot:item.defp="{ item }">
+        <span :style="{color: getColor(item.defp, 'defp')}">
+          {{ item.defp }}
+        </span>
+      </template>
+      <template v-slot:item.shit="{ item }">
+        <span :style="{color: getColor(item.shit, 'shit')}">
+          {{ item.shit }}
+        </span>
+      </template>
+      <template v-slot:item.sres="{ item }">
+        <span :style="{color: getColor(item.sres, 'sres')}">
+          {{ item.sres }}
+        </span>
+      </template>
       <template v-slot:item.atkpower="{ item }">
         <v-chip
           class="ma-2"
@@ -99,13 +149,56 @@ export default {
       switch (key) {
         case 'atk':
           if (value > 184) {
-            return 'brown';
+            return '#ccac00';
           } else if (value > 136) {
-            return 'purple';
+            return 'blueviolet';
           } else {
             return 'blue';
           }
-          break;
+        case 'atkp':
+        case 'defp':
+        case 'hpp':
+        case 'shit':
+        case 'sres':
+          if (value > 20) {
+            return '#ccac00';
+          } else if (value > 14) {
+            return 'blueviolet';
+          } else {
+            return 'blue';
+          }
+        case 'hp':
+          if (value > 794) {
+            return '#ccac00';
+          } else if (value > 560) {
+            return 'blueviolet';
+          } else {
+            return 'blue';
+          }
+        case 'spd':
+          if (value > 12) {
+            return '#ccac00';
+          } else if (value > 8) {
+            return 'blueviolet';
+          } else {
+            return 'blue';
+          }
+        case 'cri':
+          if (value > 12) {
+            return '#ccac00';
+          } else if (value > 9) {
+            return 'blueviolet';
+          } else {
+            return 'blue';
+          }
+        case 'crid':
+          if (value > 19) {
+            return '#ccac00';
+          } else if (value > 13) {
+            return 'blueviolet';
+          } else {
+            return 'blue';
+          }
       }
       return '';
     },
