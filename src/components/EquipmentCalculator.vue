@@ -185,7 +185,7 @@
       >
         <v-text-field
           v-model="fast"
-          label="快速輸入(範例:a10 ap10.9 c10.9 cd20.1)可不照順序 有小數一定要輸入 不用打%"
+          label="快速輸入(範例:a10 ap10.9 c10.9 x20.1)可不照順序 有小數一定要輸入 不用打%"
           hint="a攻擊 a攻擊% c爆擊 x暴傷 s速度 h生命 h生命% d防禦 d防禦% t命中 r抵抗"
           @change="tryParse"
           filled
