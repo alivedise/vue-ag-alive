@@ -46,7 +46,7 @@
         md="2"
       >
         <v-text-field
-          label="攻擊%(ap)"
+          label="攻擊%(a)"
           v-model.lazy="equipment.atkp"
           hide-details
           single-line
@@ -72,7 +72,7 @@
         md="2"
       >
         <v-text-field
-          label="爆擊傷害(cd)"
+          label="爆擊傷害(x)"
           v-model.lazy="equipment.crid"
           hide-details
           single-line
@@ -137,7 +137,7 @@
         md="2"
       >
         <v-text-field
-          label="防禦%(dp)"
+          label="防禦%(d)"
           v-model.lazy="equipment.defp"
           hide-details
           single-line
@@ -150,7 +150,7 @@
         md="1"
       >
         <v-text-field
-          label="狀態命中%(sh)"
+          label="狀態命中%(t)"
           v-model.lazy="equipment.shit"
           hide-details
           single-line
@@ -163,7 +163,7 @@
         md="1"
       >
         <v-text-field
-          label="狀態抵抗%(sr)"
+          label="狀態抵抗%(r)"
           v-model.lazy="equipment.sres"
           hide-details
           single-line
@@ -185,8 +185,8 @@
       >
         <v-text-field
           v-model="fast"
-          label="快速輸入(範例:a10 ap10.9 c10.9 cd20.1)可不照順序"
-          hint="a攻擊 ap攻擊% c爆擊 cd暴傷 s速度 h生命 hp生命% d防禦 dp防禦% sh命中 sr抵抗"
+          label="快速輸入(範例:a10 ap10.9 c10.9 cd20.1)可不照順序 有小數一定要輸入 不用打%"
+          hint="a攻擊 a攻擊% c爆擊 x暴傷 s速度 h生命 h生命% d防禦 d防禦% t命中 r抵抗"
           @change="tryParse"
           filled
         ></v-text-field>
@@ -225,6 +225,7 @@ export default {
         a: 'atk',
         af: 'atkp',
         cf: 'cri',
+        xp: 'crid',
         cdp: 'crid',
         s: 'spd',
         h: 'hp',
