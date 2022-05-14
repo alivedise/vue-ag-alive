@@ -46,7 +46,7 @@
         md="2"
       >
         <v-text-field
-          label="攻擊%(b)"
+          label="攻擊%(ap)"
           v-model.lazy="equipment.atkp"
           hide-details
           single-line
@@ -72,7 +72,7 @@
         md="2"
       >
         <v-text-field
-          label="爆擊傷害(d)"
+          label="爆擊傷害(cd)"
           v-model.lazy="equipment.crid"
           hide-details
           single-line
@@ -85,7 +85,7 @@
         md="2"
       >
         <v-text-field
-          label="速度(e)"
+          label="速度(s)"
           v-model.lazy="equipment.spd"
           hide-details
           single-line
@@ -98,7 +98,7 @@
         md="2"
       >
         <v-text-field
-          label="固定生命(f)"
+          label="固定生命(h)"
           v-model.lazy="equipment.hp"
           hide-details
           single-line
@@ -111,7 +111,7 @@
         md="2"
       >
         <v-text-field
-          label="生命%(g)"
+          label="生命%(hp)"
           v-model.lazy="equipment.hpp"
           hide-details
           single-line
@@ -124,7 +124,7 @@
         md="2"
       >
         <v-text-field
-          label="防禦(h)"
+          label="防禦(d)"
           v-model.lazy="equipment.def"
           hide-details
           single-line
@@ -137,7 +137,7 @@
         md="2"
       >
         <v-text-field
-          label="防禦%(i)"
+          label="防禦%(dp)"
           v-model.lazy="equipment.defp"
           hide-details
           single-line
@@ -150,7 +150,7 @@
         md="1"
       >
         <v-text-field
-          label="狀態命中%(j)"
+          label="狀態命中%(sh)"
           v-model.lazy="equipment.shit"
           hide-details
           single-line
@@ -163,7 +163,7 @@
         md="1"
       >
         <v-text-field
-          label="狀態抵抗%(k)"
+          label="狀態抵抗%(sr)"
           v-model.lazy="equipment.sres"
           hide-details
           single-line
@@ -185,8 +185,8 @@
       >
         <v-text-field
           v-model="fast"
-          label="快速輸入(範例:a10 b10.9 c10.9 d20.1)可不照順序"
-          hint="a攻擊 b攻擊% c爆擊 d暴傷 e速度 f生命 g生命% h防禦 i防禦% j命中 k抵抗"
+          label="快速輸入(範例:a10 ap10.9 c10.9 cd20.1)可不照順序"
+          hint="a攻擊 ap攻擊% c爆擊 cd暴傷 s速度 h生命 hp生命% d防禦 dp防禦% sh命中 sr抵抗"
           @change="tryParse"
           filled
         ></v-text-field>
@@ -213,6 +213,19 @@ export default {
         { text: '爆擊系列（水）', value: 2},
         { text: '暴傷系列（章魚）', value: 3},
       ],
+      GUESS: {
+        a: 'a',
+        ap: 'atkp',
+        c: 'cri',
+        cd: 'crid',
+        s: 'spd',
+        h: 'hp',
+        hp: 'hpp',
+        d: 'def',
+        dp: 'defp',
+        sh: 'shit',
+        sr: 'sres',
+      },
       FAST: {
         a: 'atk',
         b: 'atkp',
@@ -254,13 +267,20 @@ export default {
     ...mapActions(['fetchData']),
     ...mapMutations(['save']),
     tryParse() {
+      if (this.fast.trim() === '') {
+        return;
+      }
       const a = this.fast.split(' ');
       a.forEach((i) => {
-        const result = new RegExp(/(\w)([0-9]*[.]*[0-9]*)/).exec(i);
+        const result = new RegExp(/([A-Za-z]+)([0-9]*[.]*[0-9]*)/).exec(i);
         if (!result) {
           return;
         }
-        this.equipment[this.FAST[result[1]]] = result[2];
+        if (this.GUESS[result[1]] in this.equipment) {
+          this.equipment[this.GUESS[result[1]]] = result[2];
+        } else if (this.FAST[result[1]] in this.equipment) {
+          this.equipment[this.FAST[result[1]]] = result[2];
+        }
       });
       this.fast = '';
       this.add();
