@@ -200,6 +200,14 @@
 import { mapActions, mapMutations, mapState } from 'vuex';
 import EquipmentList from '@/components/EquipmentList.vue';
 
+function isInt(n) {
+  return n % 1 === 0;
+}
+
+function isFloat(n){
+    return Number(n) === n && n % 1 !== 0;
+}
+
 export default {
   name: 'CalculatorContainer',
   components: {
@@ -213,6 +221,21 @@ export default {
         { text: '爆擊系列（水）', value: 2},
         { text: '暴傷系列（章魚）', value: 3},
       ],
+      SHORT_GUESS: {
+        a: 'atk',
+        af: 'atkp',
+        cf: 'cri',
+        cdp: 'crid',
+        s: 'spd',
+        h: 'hp',
+        hf: 'hpp',
+        d: 'def',
+        df: 'defp',
+        t: 'shit',
+        r: 'res',
+        tf: 'shit',
+        rf: 'sres',
+      },
       GUESS: {
         a: 'a',
         ap: 'atkp',
@@ -276,7 +299,10 @@ export default {
         if (!result) {
           return;
         }
-        if (this.GUESS[result[1]] in this.equipment) {
+        const appendix = isInt(result[2]) ? '' : 'f';
+        if (this.SHORT_GUESS[`${result[1]}${appendix}`] in this.equipment) {
+          this.equipment[this.SHORT_GUESS[`${result[1]}${appendix}`]] = result[2];
+        } else if (this.GUESS[result[1]] in this.equipment) {
           this.equipment[this.GUESS[result[1]]] = result[2];
         } else if (this.FAST[result[1]] in this.equipment) {
           this.equipment[this.FAST[result[1]]] = result[2];
