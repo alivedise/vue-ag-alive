@@ -167,6 +167,14 @@ export default {
           } else {
             return 'blue';
           }
+        case 'def':
+          if (value > 131) {
+            return '#ccac00';
+          } else if (value > 98) {
+            return 'blueviolet';
+          } else {
+            return 'blue';
+          }
         case 'hp':
           if (value > 794) {
             return '#ccac00';
