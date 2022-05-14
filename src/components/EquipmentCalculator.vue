@@ -300,7 +300,9 @@ export default {
         if (!result) {
           return;
         }
-        const appendix = result[2].includes('.') ? 'f' : '';
+        // const appendix = result[2].includes('.') ? 'f' : '';
+        // if the value is less than 30, we treat it as floating(percentage)
+        const appendix = Number(result[2]) < 30 ? 'f' : '';
         if (this.SHORT_GUESS[`${result[1]}${appendix}`] in this.equipment) {
           this.equipment[this.SHORT_GUESS[`${result[1]}${appendix}`]] = result[2];
         } else if (this.GUESS[result[1]] in this.equipment) {
